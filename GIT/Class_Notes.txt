@@ -1,0 +1,456 @@
+
+DevOps Training :::
+
+Start Date: 27th Jan. 2024
+Completion Date: 25th Feb. 2024
+
+Time : 9:30AM to 1:30PM IST - Weekends.
+4Hrs/Day - 10 Days.
+
+
+
+######################
+Day 1 - 27th Jan. 2024
+######################
+
+
+Module 1: 
+
+	DevOps Training :::
+
+		1. Intro to DevOps 
+		2. DevOps Tools ::
+			Open-Source DevOps Tools :::
+				GIT
+				Jenkins 
+				Ansible
+				Docker 
+				Kubernetes 
+				Terraform
+				Prometheus and Grafana
+				
+	Introduction to DevOps :::
+	
+		- What is DevOps according to you!
+		
+		
+		SDLC :::
+		
+		Software - Applications 
+			
+			- Desktop Applications 
+					Billing System
+			- Web Applications 
+					E_Commerce(amazone.com)/Netflex/facebook
+			- Mobile Applications
+					Mobile App 
+			- Embedded Applications 
+					Chip level Applications 
+					
+		SDLC ::: Software Development Life Cycle
+		
+			- Requirement Analysis 		-- Billing System( functions/tools/resource/timeline)
+			- Design 
+			- Code/Develop
+			- Testing 
+			- Implement the product to Production(LIVE)
+			- Monitor/Maintain the application
+		
+		Waterfall Model :::
+				- Completely Linear in approach
+				- Follows Top-Down Approach
+				- Monolith Application Architecture
+				
+
+			Core_Project :
+				- Requirement Analysis 		-- Billing System( 10 functions/tools/resource/timeline) - 10Months.
+				- Design 
+				- Code/Develop		
+				- Testing 
+				- Implement the product to Production(LIVE)
+				- Monitor/Maintain the application
+				
+			Enhancement-Project1
+				- Requirement Analysis 		-- Billing System( functions/tools/resource/timeline) - 10Months.
+				- Design 
+				- Code/Develop		
+				- Testing 
+				- Implement the product to Production(LIVE)
+				- Monitor/Maintain the application
+				
+
+			Drawbacks :
+				We cannot go back and change/add the requirements
+			
+		AGILE Methodologies :::
+
+			SDLC ::: Software Development Life Cycle
+			
+				- Requirement Analysis 		-- Billing System( functions/tools/resource/timeline)
+				- Design 
+				- Code/Develop
+				- Testing 
+				- Implement the product to Production(LIVE)
+				- Monitor/Maintain the application	
+
+			Billing Application 
+				10 Functions :: inventory/payment/stock/
+				Functions/Modules/Iterations
+				
+			Iteration 1 : stock Mgmt.
+
+				- Requirement Analysis 		
+				- Design 
+				- Code/Develop
+				- Testing 
+				- Implemented/Integrated for further Testing for Release
+				- Monitor/Maintain the application	
+
+				
+			Iteration 2 : payment.
+
+				- Requirement Analysis 		
+				- Design 
+				- Code/Develop
+				- Testing 
+				- Implemented/Integrated for further Testing for Release
+				- Monitor/Maintain the application	
+	
+			Iteration nth : New Function.
+
+				- Requirement Analysis 		
+				- Design 
+				- Code/Develop
+				- Testing 
+				- Implemented/Integrated for further Testing for Release
+				- Monitor/Maintain the application	
+				
+			Using AGILE Methodologies ::
+				We can able achieve :
+				
+					Continuous Development
+					Continuous Integration 
+					Continuous Testing 
+					Continuous Delivery 
+						It is process of releasing the products to Production Environment with manual approvals.
+					
+				We CANNOT achieve :
+					Continuous Deployment
+						It is process of releasing the products to Production Environment without any manual approvals.
+						
+				AGILE Methodologies always seek for manual approval from all stakeholder for the Production Release.
+				
+		DevOps :::
+		
+			What is DevOps ???
+			
+			DevOps is a Software Development Strategy which helps to promote the collaboration between the teams like  Development Team and Operations Team to achieve Continuous Development, Continuous Integration, Continuous Testing, Continuous Delivery, Continuous Deployment and Continuous Monitoring in a more automated fashion.
+				
+			
+			How to Implement DevOps ?? ==> DevSecOps 
+			
+			Teams ::
+			
+				Infra-Structure Management Team 
+				Development Team 
+				Testing Team 
+				Release Management Team 
+				Production Support Team 
+				Production Monitoring Team 
+				Security Team 
+				
+			DevOps Stage :::
+	
+				Continuous Development :
+					- It is the capability of the Development Team to Continuously Develop the code and improve the Developers' productivity.
+					
+					What is the Role of Developers ???
+					- Coding.
+					
+					- Code 				Java/python/C#
+					- Manual Build 
+						Build ==> 	It is a process of compiling the Source Code and Creating Artifacts
+									Artifacts are executables - Binaries(*.war/*.jar/*.exec/*.dll)
+									Build Tools : Maven 
+					- Manual Unit Testing 
+					- Promote the changes to Test Environment
+					- Notify the Testing teams 
+					
+					Using DevOps Approach :::
+					
+						- Understand the Design & Code. 
+							IDEs - Integrated Development Environment - Eclipse/Visual Studio Code / Visual Studio / Pycharm
+							
+						- Save the Changes in a Souce Code Management System.
+						
+						The following activities can be automated using DevOps Approach/Tools	
+							- Automated Build 
+							- Automated Unit Testing 
+							- Automatically Promote the changes to Test Environment
+							- Notify the Testing teams 						
+											
+						Tools :::
+							IDEs & GIT / GITHUB  / Maven 
+							
+				Continuous Integration :
+					- It is the capability of the Development Team to Continuously Integrate the code changes for further testing without relying others.	
+					
+						The following activities can be automated using DevOps Approach/Tools	
+							- Automated Build 
+							- Automated Unit Testing 
+							- Automatically Promote the changes to Test Environment
+							- Notify the Testing teams 
+							
+					- Application Architecture !!!
+					
+						- Monolith Application Architecture 
+							- Tightly coupled application 
+							- We cannot independly test the changes.
+							
+						- Micro-Service Based Application Architecture
+							- Loose-Coupled Application 
+							- Functions/Modules are called as micro-service
+							
+						Tools :
+							IDE/GIT/Jenkins/Docker/Kubernetes/Ansible
+				
+				Continuous Testing
+				
+					- Testing Team perform Automated Testing
+
+					Tools : 
+						Jenkins/JUNIT/TESTNG/SELENIUM
+				
+				Continuous Delivery/Deployment 
+					
+					- Both the Continuous Delivery/Deployment are used for Production Release 
+
+						Tools :
+							Jenkins/Docker/Kubernetes/Ansible
+							
+					Continuous Delivery 
+						- Always need the Manual Approvals before Production Release.
+						- It is process of releasing the products to Production Environment with manual approvals.
+						- There might be downtime.
+						Eg.: 
+						
+							Banking Applications -- 
+							
+								Production Release Window :
+									During Weekends/Mid-Night - 4 to 6hrs 
+									Seek approvals from all stake-holders
+									Post Production Release Testing ::
+										- Try to fix the issue.
+										- or revert the changes. 
+										
+					Continuous Deployment
+						- This doesnt required any Manual Intervension.
+						- It is process of releasing the products to Production Environment without any manual approvals	
+
+						Eg.: 
+														
+							Facebook/Netflix/google/amazon :::
+								Achieve Continuous Deployment without any manual intervension/downtime.
+								Using Matured Level of DevOps.
+				
+				Continuous Monitoring :
+				
+					- Infra-Structure Monitoring
+							- CPU/Memory/Traffic 
+						
+						Tools : Prometheus/Grafana/Nagios/Splunk/Dynatace
+					
+					- Application Monitoring
+						
+						Application Monitor the performance of Application calls 
+						
+						Tools : DataDog / AppDynamics
+						
+			Infra-Structure Management Team 			
+					- Provisioning/Creating Infra-Structure
+					- Configuration of Infra-Structure
+					
+					Tools : 
+					
+						IAC Tools - Infra-Structure As Code:
+						
+						Provisioning/Creating Infra-Structure 			---> Terraform 
+						Configuration of Infra-Structure				---> Ansible 
+					
+			DevOps Tools :::
+			
+				Open-Source DevOps :::
+					GIT 
+					Jenkins 
+					Docker 
+					Ansible 
+					Terraform 
+					Kubernetes 
+					Prometheus/Grafana
+					
+				Managed Services :::
+				
+					AWS 	-- Code Commit/Pipeline,.....
+					Azure 	-- Azure DevOps Service 
+					GCP 	-- GCP DevOps Service
+					
+					
+			Environments :::
+			
+				Non-Prod Environments 									====> 	Production Environments
+				
+					DEV Environment
+					Build Environment 
+					Test Environment
+						QA - Quality Assurance Testing 
+						UAT - User Acceptance Testing 					====>		Prod Environment
+						
+						
+			DevOps LifeCycle :::	
+
+
+				Automation :::
+				
+				Coding 	--> Build --> Testing --> Release to Prod --> Monitoring 
+				  |														|
+				  |														|
+				  |														|
+				  |														|
+				  <------------------------------------------------------
+				  
+				 
+			What is DevOps ???
+			
+			DevOps is a Software Development Strategy which helps to promote the collaboration between the teams like  Development Team and Operations Team to achieve Continuous Development, Continuous Integration, Continuous Testing, Continuous Delivery, Continuous Deployment and Continuous Monitoring in a more automated fashion.					
+				
+			DevOps is all about ::: Continuous Improvement!!!
+
+				People 		
+				Process 
+				Tools 
+				
+				
+			Detailed Assessment :::
+			
+			
+			DevOps Team 
+			
+				DevOps Asso. / Sr. DevOps Asso.
+				DevOps Engg. / Sr. DevOps Engg.
+				DevOps Lead / Sr. DevOps Lead 
+				DevOps Architect / Sr. DevOps Archi.
+				DevOps Consultant 
+				
+			Always find the Scope for Automation.
+			
+			Waterfall/Agile/DevOps/DevSecOps/GITOps/SRE/MLOps/AIOps.............
+			
+			
+Module 2 :
+		
+			Version Control System using GIT.
+			
+			Intro. to VCS 
+			
+			Continuous Development ::::
+			
+			What is	Version Control System?
+			
+				- Is used to Version the Source Code Changes.
+				- To Track the Changes.
+				- The Changes can be tracked using the Version_Number/Tags/Commit_ids
+			
+			Web Application ::::
+			
+			Web_app_Project_Folder 
+				index.html 
+				
+			<html>
+			--
+			--
+			-
+			-
+			-
+			-
+			-
+			</html>
+			
+				save index.html 
+				save the file using VCS ->
+				index.html_V1.0
+				test the changes 
+			
+			<html>
+			--
+			--
+			-
+			-asdfs
+			asdfsasd
+			fashiondf
+			asdf
+			-
+			-
+			-
+			</html>			
+			
+				save index.html 
+				save the file using VCS ->
+				index.html_V1.1
+				test the changes 	
+
+
+			Types of Version Control System :::
+			
+				1. Local VCS 
+						- It is used only in a Local machine
+						- Cannot possible to share the source code repositories to other.
+						
+				2. Centralized VCS
+						- The Source Code Repositories and maintained in a central server.
+						- Users should have valid access and should be Online to access the files from Centralized VCS.
+						- If Users are offline / If the central server is down, then we cannot access the files. 
+						- Users will not have any Copy of files in the local machine.
+						
+				3. Distributed VCS ::
+						- The Source Code Repositories are maintained in a Remote Servers.
+						- Users should have valid access remote Repositories.
+						- If Users can work offline.
+						- Copy of Files can be stored in the local machine.
+						
+				
+			GIT :::
+			
+				It is a Open-Source Distributed Version control System.
+				It is used to version control the Changes 
+				It is used to Track the Changes
+				It is used to perform Parallel Development
+					Parallel Development can be achieved using Branching Techniques. 
+					
+					
+			Local Machine 		- Install GIT CLI
+			
+				Local GIT Repositories
+			
+			Remote GIT Repositories
+				
+				GITHUB 	- is one of the Remote Repositories
+				GITLAB 
+				AZURE Repo 
+				AWS Code Commit 
+				BitBucket 
+			
+			Create GITHUB Account :::
+					https://github.com/
+					
+			Terminologies :::
+			
+				Repositories ::
+				
+					It is collection of Folders and Files. 
+			
+			
+			
+			
+			
+			
+				
