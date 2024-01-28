@@ -449,6 +449,496 @@ Module 2 :
 					It is collection of Folders and Files. 
 			
 			
+	
+######################
+Day 2 - 28th Jan. 2024
+######################		
+
+
+	Distributed Version Control System - GIT.
+	
+			Install GIT CLI in Local Machine 
+			
+			Working with GIT Commands....	
+
+		Project_Folder 
+			Repo1 
+			Repo2 
+			Repo3 
+			
+		Linux Fundamentals 
+				Linux a Operating System 
+				Linux shell/Bash Commands 
+				
+		cd d: 
+		mkdir SA-RDevOpsJan27
+		cd SA-RDevOpsJan27
+		mkdir repo1 
+		mkdir repo2
+
+		Working with GIT ::::
+		
+		Git Workflow :::
+		
+		Distributed VCS :::
+		
+	
+		Local Machine 											<====>										Remote Server 
+		
+		Working Directory 	  -->		Staging/Index Area		 --> 		Local Repository		-->			Remote Repository
+		
+		index.html		  -----------> 	index.html			------------->	index.html_v1.0		---------->		index.html_v1.0
+							git add                          git commit                          git push
+		
+		index.html		  -----------> 	index.html			------------->	index.html_v1.1			
+							git add                          git commit                    
+			
+
+		Developers' Workload :::
+		
+			- New Project 
+			
+			- Enhancement/Bug fixing
+			
+			
+		
+		git clone 	==>	Used to Copy/Clone the Entire Remote Repository to Local Machine 
+		
+		git add		==> Used to add the changes from Working Directory to Staging Area 
+		
+		git commit 	==> Used to permanently commit the changes from Staging Area to Local Repository
+		
+		git Push	==> Used to Push the Changes from Local Repository to Remote Repository 
+		
+		git fetch/pull 
+			
+			---> Both git fetch/pull are used to Handle the incremental changes from Remote Repository
+		
+			git fetch ==> 
+				It is just to check for the incremental changes in the remote repository.
+				If the Incremental Changes are available, it will be updated only in the Local Repository.
+				git fetch will NEVER Update the Incremental Changes in Working Directory
+				Later if we want to bring the changes to working directory from local repository :
+					We need to explicitly use git Merge / git Checkout / git Pull.
+		
+
+			git pull ==> 
+				It is to check for the incremental changes in the remote repository.
+				If the Incremental Changes are available, it will update the Working Directory as well as the Local Repository.
+				
+				git pull ==> git fetch + git Merge 
+				
+				
+		fork 		==>	Used to copy a remote repository to another remote repository
+		
+		git init 	==> Used to Initialize a git repository in the Local Machine
+						Create a GIT Directory and the default branch called master/main
+		
+		
+		Remote Repository ::::
+		
+			repo1 :		20KB
+					index.html 		10 lines 	10KB
+					index.html 		+10 lines   10KB 				# Incremental 
+					
+			
+		clone :
+			repo1 : 10KB 
+					index.html 		10 lines 	10KB	
+					index.html 		+10 lines   10KB 
+		Pull :	
+		
+		
+		Working with Git Local Repository ::: 
+		
+		Local Machine 											<====>										Remote Server 
+		
+		Working Directory 	  -->		Staging/Index Area		 --> 		Local Repository		-->			Remote Repository
+		
+		index.html		  -----------> 	index.html			------------->	index.html_v1.0		---------->		index.html_v1.0
+							git add                          git commit                          git push
+		
+		file1.txt		  -----------> 	file1.txt			------------->	index.html_v1.1			
+							git add                          git commit                    
+					
+		
+		
+		Create Local Repository :::
+		
+		git init 	==> Used to Initialize a git repository in the Local Machine
+						Create a GIT Directory and the default branch called master/main
+						
+						****Branch is the Logical copy of a Repository
+
+						
+		Open git bash 
+		cd d: 
+		mkdir SA-RDevOpsJan27
+		cd SA-RDevOpsJan27
+		mkdir repo1 
+		mkdir repo2
+		
+		git init 
+		
+		echo "rec1" >> file1.txt 
+			
+		git status 		==> Used to get the current status of the repository
+		
+		git add			==> Used to add the changes from Working Directory to Staging Area 
+		
+		Eg: 
+		
+			git add <file_name>
+			
+			git add <file1_name> <file2_name>
+
+			git add *.jsp *.txt 
+			
+			git add *.java 
+			
+			git add .			# Used to add all the files to staging area
+			
+			
+		
+		git commit 		==> Used to permanently commit the changes from Staging Area to Local Repository
+		
+		git log 		==> Used to get the list of commits in the repository
+		
+		HEAD Pointer	==> Always point to the latest commit of current Branch.
+		
+		
+		git commit 		==> 
+		
+			unique commit_id 
+			
+		git log ::
+			list commits 
+			
+			Author Name & EMail_id has to be configured before the very first commit.
+			
+		
+		git config :::
+		
+			Local Configuration				# This is meant within a specific repository
+			
+				git config user.name "Loksai"
+				git config user.email "loksai@asdfsd.com"
+			
+			Global Configuration			# This is meant for all the repositories in Local Machine
+			
+				git config --global user.name "Loksai"
+				git config --global user.email "loksai@asdfsd.com"
+				
+Practise:::
+
+		Open git bash 
+		
+		cd d: 
+		mkdir SA-RDevOpsJan27
+		cd SA-RDevOpsJan27
+		mkdir repo1 
+		cd repo1 
+		
+		git init 
+
+		git config --global user.name "Loksai"
+		git config --global user.email "loksai@asdfsd.com"		
+
+		git config --list
+		
+		echo "rec1" >> file1.txt 
+		
+		ls
+		
+		cat file1.txt
+			
+		git status 	
+		
+		git add	file1.txt 	
+		
+		git commit -m "Created file1.txt"
+		
+		git log 	
+		
+		echo "rec1" >> file2.txt 
+		
+		git add file2.txt 
+		
+		git commit -m "Created file2.txt"
+		
+		git log 
+		cd ..
+		
+		git --help 
+		
+		
+		git add			==> Used to add the changes from Working Directory to Staging Area 
+		
+		Eg: 
+		
+			git add <file_name>
+			
+			git add <file1_name> <file2_name>
+
+			git add *.jsp *.txt 
+			
+			git add *.java 
+			
+			git add .			# Used to add all the files to staging area
+			
+			
+		
+		git commit 		==> Used to permanently commit the changes from Staging Area to Local Repository
+		
+			git commit -m "<Valid Message related to the change>"
+
+				CR Number  CR012024
+				Release ID 
+				
+			git commit -m "CR012024 - Created/Updated the file"
+
+	
+		
+		git log 		==> Used to get the list of commits in the repository
+		
+		git log --oneline 
+		
+		git log -2 
+		
+		git log --stat -2
+		
+		git log --oneline -2
+		
+		git show <commit_id>
+		
+		git diff 			# Used to compare and check the difference between the current changes in working directory and already committed Changes.
+		
+		How to unstage or remove the changes from staging area ???
+		
+			git rm --cached <file_name>		# Used to just remove the changes from staging area. The Changes will be back to working directory
+			
+			git rm -f <file_name> 			# Used to permanently remove the file from staging and working directory
+			
+  485  cd d:
+  486  clear
+  487  mkdir SA-RDevOpsJan27
+  488  cd SA-RDevOpsJan27/
+  489  pwd
+  490  mkdir Repo1
+  491  ls
+  492  cd Repo1/
+  493  pwd
+  494  cd ..
+  495  mkdir Repo2
+  496  ls
+  497  clear
+  498  ls
+  499  pwd
+  500  clear
+  501  cd d:
+  502  cd SA-RDevOpsJan27/
+  503  ls
+  504  cd Repo1/
+  505  clear
+  506  pwd
+  507  ls
+  508  ls -a
+  509  clear
+  510  git init
+  511  ls
+  512  ls -a
+  513  cd .git
+  514  ls
+  515  cd ..
+  516  ls
+  517  clear
+  518  ls
+  519  ls
+  520  clear
+  521  echo "Hello"
+  522  echo "Record1" >> file1.txt
+  523  ls
+  524  cat file1.txt
+  525  echo "Record2" >> file1.txt
+  526  cat file1.txt
+  527  git status
+  528  git add file1.txt
+  529  git status
+  530  git commit -m "Created file1.txt"
+  531  git status
+  532  git log
+  533  clear
+  534  cd ..
+  535  mkdir demorepo1
+  536  cd demorepo1/
+  537  clear
+  538  ls
+  539  ls -a
+  540  clear
+  541  git init
+  542  ls -a
+  543  clear
+  544  git status
+  545  ls
+  546  echo "rec1" >> file1.txt
+  547  git status
+  548  git add file1.txt
+  549  git status
+  550  git commit -m "Created file1.txt"
+  551  git log
+  552  ls
+  553  echo "rec1" >> file2.txt
+  554  git status
+  555  git add file2.txt
+  556  git status
+  557  git commit -m "created file2.txt"
+  558  git log
+  559  clear
+  560  git status
+  561  git log
+  562  clear
+  563  git log
+  564  git config user.name "Loksai"
+  565  echo "rec!" >> file3.txt
+  566  git add file3.txt
+  567  git commit -m "Created file3.txt"
+  568  git log
+  569  cd ..
+  570  ls
+  571  cd Repo2/
+  572  git init
+  573  echo "REc1" >> f1.txt
+  574  git add f1.txt
+  575  git commit -m "Created f1.txt"
+  576  git log
+  577  git config list
+  578  clear
+  579  git config --list
+  580  clear
+  581  git log
+  582  git --help
+  583  clear
+  584  git --help
+  585  git -list
+  586  clear
+  587  clear
+  588  cd ..
+  589  ls
+  590  mkdir demorepo2
+  591  clear
+  592  cd demorepo2
+  593  clear
+  594  git init
+  595  git status
+  596  echo "rec1" >> f1.txt
+  597  git status
+  598  git add f1.txt
+  599  git commit -m "Created f1.txt"
+  600  clear
+  601  ls
+  602  echo "rec1" >> s1.txt
+  603  ls
+  604  git status
+  605  echo "rec1" >> s2.txt
+  606  echo "rec1" >> s3.txt
+  607  echo "rec1" >> q1.java
+  608  echo "rec1" >> q2.jsp
+  609  echo "rec1" >> q1.jsp
+  610  echo "rec1" >> l1.md
+  611  echo "rec1" >> k1.doc
+  612  echo "rec1" >> e1.java
+  613  ls
+  614  git status
+  615  git add e1.java s1.txt
+  616  git status
+  617  git add *.txt *.jsp
+  618  git status
+  619  git add .
+  620  git status
+  621  clear
+  622  git status
+  623  git rm --cached e1.java
+  624  git status
+  625  git rm -f *.jsp
+  626  git status
+  627  ls
+  628  clear
+  629  git status
+  630  git commit -m "created sample files"
+  631  git status
+  632  clear
+  633  git log
+  634  git add .
+  635  git commit -m "created dummy file"
+  636  echo "rec1" >> w1.txt
+  637  git add .
+  638  git commit -m "created w1.txt"
+  639  echo "rec1" >> t1.txt
+  640  git add .
+  641  git commit -m "created t1.txt"
+  642  clear
+  643  git log
+  644  git log
+  645  git log --oneline
+  646  git log --oneline -2
+  647  git log --oneline -3
+  648  git log -2
+  649  git log --stat -2
+  650  clear
+  651  git log -1
+  652  git log --stat -1
+  653  clear
+  654  git log --oneline
+  655  git show 98e4ad5
+  656  clear
+  657  clear
+  658  clear
+  659  ls
+  660  git status
+  661  cat e1.java
+  662  echo "rec2" >> e1.java
+  663  echo "rec3" >> e1.java
+  664  cat e1.java
+  665  git status
+  666  git diff
+  667  git add .
+  668  git commit -m "Updated e1.java"
+  669  git diff
+  670  cat e1.java
+  671  echo "record1" > e1.java
+  672  cat e1.java
+  673  git diff
+  674  git add .
+  675  git commit -m "updated e1.java"
+  676  git diff
+  677  clear
+  678  ls
+  679  rm f1.txt
+  680  ls
+  681  git status
+  682  clear
+  683  git commit -m "Deleted file"
+  684  git add .
+  685  git commit -m "Deleted file"
+  686  git log --oneline
+  687  git log --stat -1
+  688  clear
+  689  history
+
+
+
+		AWS Cloud Platform ::::
+		
+			Virtual Machines :::
+			
+			Create AWS Free-Tier Account
+				Avail it for 12 Months.
+				- Active Email ID 
+				
+				- Active Mobile Phone Number 
+				
+				- Active Credit/Debit Card - with International Transaction Enabled. 2INR 
+				
 			
 			
 			
