@@ -1698,4 +1698,239 @@ Next :
 		SSH Agent - MobaXterm		https://mobaxterm.mobatek.net/download.html			
 			
 			
+			
+######################
+Day 4 - 4th Feb. 2024
+######################	
+
+	git stash	
+			- > used to save the uncommitted changes to a temporary area in the repository.
+	
+		Repo1 
+			master : c1
+			
+				feature1 : c1,
 				
+		
+		git stash save "Stash_Message"
+		
+		git stash list 
+		
+		git stash apply 	-- apply the latest entry from stage list back to staging area.
+		
+		git stash apply stash@{1} -- apply the specific entry from stage list back to staging area.
+		
+		git stash drop 		-- drop the latest entry from stage list.
+		
+		git stash drop stash@{1} 		-- drop the specific entry from stage list.
+		
+		git stash pop	 -- apply latest entry from stage list back to staging area.
+						 --	Delete the entry from the stash list.
+						 
+		git stash clear  - clean up the stage list
+		
+	
+	
+	Working with Remote GIT Repositories ::
+	
+		Developers' Workload :::
+		
+			- New Project 
+			
+			- Enhancement/Bug fixing
+			
+		Remote Repository :::
+		
+			Pull Request :::: 
+					Submitted by the developer to the reviewer 
+					
+		
+		https://github.com/SA-RDevOps-Jan27/testrepository1.git
+			git clone https://github.com/SA-RDevOps-Jan27/testrepository1.git 
+			
+		git clone 	==>	Used to Copy/Clone the Entire Remote Repository to Local Machine 
+		
+		git add		==> Used to add the changes from Working Directory to Staging Area 
+		
+		git commit 	==> Used to permanently commit the changes from Staging Area to Local Repository
+		
+		git Push	==> Used to Push the Changes from Local Repository to Remote Repository 
+		
+		git fetch/pull 
+			
+			---> Both git fetch/pull are used to Handle the incremental changes from Remote Repository
+		
+			git fetch ==> 
+				It is just to check for the incremental changes in the remote repository.
+				If the Incremental Changes are available, it will be updated only in the Local Repository.
+				git fetch will NEVER Update the Incremental Changes in Working Directory
+				Later if we want to bring the changes to working directory from local repository :
+					We need to explicitly use git Merge / git Checkout / git Pull.
+		
+
+			git pull ==> 
+				It is to check for the incremental changes in the remote repository.
+				If the Incremental Changes are available, it will update the Working Directory as well as the Local Repository.
+				
+				git pull ==> git fetch + git Merge 
+							
+		
+		Github Access Token - is used to authenticate the user to github from any cli
+		
+			Create github access token  
+			
+				- New Project 
+
+		git commit 		==> Used to permanently commit the changes from Staging Area to Local Repository
+		
+			git commit -m "<Valid Message related to the change>"
+
+				CR Number  CR012024
+				Release ID 
+				
+			git commit -m "CR012024 - Created/Updated the file"
+	
+			git commit --amend -m "valide Msg"			# Used to change the commit message.
+
+  501  cd d:
+  502  cd SA-RDevOpsJan27/
+  503  ls
+  504  mkdir testrepo1
+  505  cd testrepo1/
+  506  clear
+  507  git init
+  508  echo "rec1" >> file1.txt
+  509  git add .
+  510  git commit -m "created file1.txt"
+  511  git branch feature1
+  512  git branch feature2
+  513  clear
+  514  git switch feature1
+  515  ls
+  516  git log --oneline
+  517  echo "rec!" >> s1.txt
+  518  echo "rec!" >> s1.txt
+  519  echo "rec!" >> s1.txt
+  520  echo "rec!" >> s1.txt
+  521  cat s1.txt
+  522  git add .
+  523  git status
+  524  git switch feature2
+  525  git status
+  526  git switch feature1
+  527  clear
+  528  git status
+  529  git stash save "created for s1.txt"
+  530  git status
+  531  ls
+  532  git log --oneline
+  533  git stash list
+  534  git stash apply
+  535  git status
+  536  ls
+  537  git ls-files
+  538  git stash list
+  539  ls
+  540  git status
+  541  git commit -m "created s1.txt"
+  542  ls
+  543  git stash drop
+  544  git stash list
+  545  echo "rec1" >> w1.txt
+  546  git add .
+  547  git stash save "craeted w1.txt"
+  548  echo "rec1" >> e1.txt
+  549  git add .
+  550  git stash save "craeted e1.txt"
+  551  echo "rec1" >> t1.txt
+  552  git add .
+  553  git stash save "craeted t1.txt"
+  554  echo "rec1" >> y1.txt
+  555  git add .
+  556  git stash save "craeted y1.txt"
+  557  git stash list
+  558  git stash apply
+  559  git stash list
+  560  git stash drop
+  561  git stash list
+  562  git stash apply stash@{1}
+  563  git stash drop stash@{1}
+  564  git stash list
+  565  git stash pop
+  566  git stash list
+  567  git stash clean
+  568  git stash clear
+  569  git stash list
+  570  cd ..
+  571  mkdir remoterepos
+  572  cd re
+  573  cd remoterepos/
+  574  git clone https://github.com/SA-RDevOps-Jan27/testrepository1.git
+  575  ls
+  576  cd testrepository1/
+  577  ls
+  578  git status
+  579  git remote -v
+  580  ls
+  581  git log --oneline
+  582  ls
+  583  git switch -c localfeature1
+  584  l
+  585  ls
+  586  echo "sfgdfgsdf" >> localfile1.txt
+  587  git add .
+  588  git commit -m "local file changes"
+  589  git status
+  590  git push -u origin localfeature1
+  591  git switch master
+  592  git switch main
+  593  git status
+  594  ls
+  595  git log --oneline
+  596  git fetch
+  597  ls
+  598  git pull
+  599  ls
+  600  git ls-files
+  601  ls
+  602  git status
+  603  git pull
+  604  cd ..
+  605  mkdir testrepo1
+  606  cd testrepo
+  607  cd testrepo1/
+  608  git init
+  609  echo "rec1" >> file.txt
+  610  git add .
+  611  git commit -m "local file1.txt"
+  612  git remote -v
+  613  git remote add origin https://github.com/SA-RDevOps-Jan27/TestRepo2.git
+  614  git remote -v
+  615  git branch -M main
+  616  git branch -M master
+  617  git push -u origin master
+  618  git branch
+  619  git branch f1
+  620  git branch f2
+  621  git branch -D f2
+  622  clear
+  623  ls
+  624  git branch
+  625  git branch f2
+  626  git branch f3
+  627  git branch
+  628  git branch -D f3
+  629  git branch
+  630  git branch -M main
+  631  git status
+  632  echo "rec1" >> l1.txt
+  633  git add .
+  634  git commit -m "aasdfasdfasdfsfasdfas"
+  635  git log --oneline
+  636  git commit -m "valide Msg"
+  637  git commit --amend -m "valide Msg"
+  638  git log --oneline
+  639  git status
+  640  cd ..
+  641  history
+
