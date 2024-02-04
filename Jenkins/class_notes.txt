@@ -1,0 +1,151 @@
+
+######################
+Day 4 - 4th Feb. 2024
+######################	
+
+	Jenkins!
+	
+	
+		Build Orchestration Tool - Jenkins 
+		
+			Jenkins -- Architecture
+			
+				Jenkins - Master Slave Architecture
+				
+					Jenkins --> 				Create the Jenkins Projects/Pipelines/Jobs, Schedule the Jenkins Projects in the Slave Nodes.
+					
+					Jenkins_Master 				(VM) - Jenkins Tools 
+						Jenkins_Slave_Node		(VM) - Build Tools(Maven)
+						
+						Build ==> 	It is a process of compiling the Source Code and Creating Artifacts
+									Artifacts are executables - Binaries(*.war/*.jar/*.exec/*.dll)
+									Build Tools : Maven 
+						
+					Java - maven/gradle/ant 
+					Python - python
+					.net - .net core 
+					angular
+					nodejs
+					
+			Java_web_app_Project --> Github Repo. 
+
+
+					Jenkins_Master 				(VM) - Jenkins Tools 		- git,jdk,jenkins
+						Jenkins_Slave_Node1		(VM) - Build Java Project	- git,jdk,maven  
+						Jenkins_Slave_Node2		(VM) - Build Python Project 						
+						Jenkins_Slave_Node3		(VM) - Build C#.Net Project 				
+						Jenkins_Slave_Node4		(VM) - Build Angular Project
+						Jenkins_Slave_Node5		(VM) - Build Ruby Project
+
+
+			Jenkins run as a service - port 8080. # Default Port.
+			
+			
+			Jenkins ::
+			
+			Developers' Perspective 
+			
+				Developers are just the consumers of Jenkins Projects.
+				They just run the project and check status of execution.
+			
+			
+			DevOps Perspective :::
+			
+				Jenkins Administrator :
+				
+				- Installation of Jenkins Tools 
+				- Configuration of Jenkins Server 
+				- Plugins Managements 
+				- User Management 
+				- Security Management 
+				- Tools Management 
+				- Credential Management
+				- Jenkin System Management 
+				- Jenkins Slave_Nodes Configuration and Management 
+				- Create CICD Pipeline Projects 
+				- Onboarding Applications to DevOps CICD Process 
+				- Trouble-Shooting the Issues 
+				- Backup & Recovery
+				- Jenkins Server and Plugins Upgrade
+
+						
+			AWS Cloud Platform - Free Tier Account!  
+			
+			Login to AWS Console using root user id ( Email_ID & Password)
+				Region 	(Asia Pacific Mumbai)
+					Availability Zones(Data Centers - Servers) 
+						Virtual Machines - EC2 Instances 
+						
+						
+			Installation of Jenkins ::
+
+				Create EC2 Instance :
+					Ubuntu 
+					t2.micro Instance Type
+					
+				Connect to the EC2 Instance 
+					- EC2 Instance Connect Option 
+					
+					- SSH Agents 
+						MobaXterm/Putty 
+								
+						SSH Agent - MobaXterm		https://mobaxterm.mobatek.net/download.html
+					
+					- Terminal 
+					
+			Jenkins run as a service - port 8080. # Default Port.	
+
+				Goto security group and edit inbound rule 
+				
+				add rule - 8080
+				
+			Install Jenkins :::		https://www.jenkins.io/doc/book/installing/linux/
+			
+			
+				VM - Jenkins_Master 		-- jdk,jenkins 
+				
+Install & Configure Jenkins Server :
+
+	- Refer to that tools/Service's Official Documentation.
+				https://www.jenkins.io/doc/book/installing/linux/
+
+1. Install the pre-requisites :::
+
+# Install Jdk:
+
+sudo -i 			
+sudo apt update -y
+
+sudo apt install openjdk-17-jre -y 						
+java -version						
+
+2. Install the Actual tool :::
+ 								
+#Install Jenkins:
+
+sudo wget -O /usr/share/keyrings/jenkins-keyring.asc \
+  https://pkg.jenkins.io/debian-stable/jenkins.io-2023.key
+
+echo deb [signed-by=/usr/share/keyrings/jenkins-keyring.asc] \
+  https://pkg.jenkins.io/debian-stable binary/ | sudo tee \
+  /etc/apt/sources.list.d/jenkins.list > /dev/null
+
+sudo apt-get update
+
+sudo apt-get install jenkins -y
+
+
+3. Perform Post_Installation Activities :::
+
+jenkins --version 
+
+systemctl status jenkins 
+
+Open web browser :
+
+http://<Public_IP_Address>:8080/
+
+E.g.: http://43.205.118.56:8080/
+
+cat /var/lib/jenkins/secrets/initialAdminPassword
+				
