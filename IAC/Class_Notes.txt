@@ -1,0 +1,121 @@
+
+######################
+Day 6 - 11th Feb. 2024
+######################	
+
+
+	Fundamentals of Ansible & Terraform ::::
+
+		Infra-Structure Management :::
+		
+		IAC Tools :::
+		
+			Infra-Structure As Code :::	-- Declarative Scripts! - *.yaml / *.json
+					key:value pair
+					
+			Terraform								--> Provisioning/Creating the Servers.
+					
+			Ansible is one of the IAC Tools 		--> Configuration Management -- Install/Uninstall/Upgrade the tools/services in the servers 
+			
+					
+			Linux Scripts -- create / config the server!
+			
+			
+		Ansible ::::
+			
+			Why?
+			
+			Ansible Architecture ?
+			
+				Client-Server Architecture 
+				Push Mechanism 
+				
+			
+			Components of Ansible 
+			
+				- Inventory file 		# used to maintain the target nodes details
+				
+				- Modules 
+				
+				- ansible.config		# Used to maintain the default properties of ansible
+			
+		Working with Ansible :::
+		
+			- Ansible adhoc commands 	== Manually - can execute a module at a time.
+			
+			- Ansible Playbooks 		# Should be reusable.
+				collection of tasks that we execute in the target nodes 
+				task is the collection of ansible modules
+				
+					Configure Jenkins Slave Nodes ::
+							git 
+							jdk 
+							maven
+		
+		Installation of Ansible :::
+		
+		3 VMs (1 + 2)
+			
+			
+			ssh key pair 
+
+				public  ::
+				
+				private ::
+			
+			
+			Ansible Controller 
+				Node1,2,3,4,5,6
+		
+Terraform :::
+
+			IAC Tool : Used for Provisioning/Creating the Servers.
+			
+			Ansible - *.yaml 
+			
+			Terraform - HCL - HashiCorp Declarative Language(based on json file format)
+			
+			Terraform Architecture 
+			
+			Why ??
+			
+			Components of Terraform 
+			
+			Terraform Working Model :::
+			
+			AWS - Cloudformation 	IAC used to automate the resource provisioning
+			
+			Azure - Azure Resource Manager  - ARM
+			
+			
+			Terraform Working Model ::
+			
+				- Identify the Scope 
+				
+				- Write the Config file - *.tf
+				
+				- Initialize the Terraform provider 
+				
+				- plan 
+				
+				- apply 
+				
+		Create AWS EC2 Instances using Terraform
+		
+		Pre-requisites :::
+		
+			Visual Studio Code in Local Machine --> https://code.visualstudio.com/download
+			
+			Install Terraform in Local Machine - demo
+					https://developer.hashicorp.com/terraform/tutorials/aws-get-started/install-cli
+					
+			Create AWS Resource.
+
+			
+			
+Next :: 
+
+		Terraform Demo 
+		
+		Docker 
+			
