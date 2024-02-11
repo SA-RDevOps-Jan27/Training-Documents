@@ -149,3 +149,441 @@ E.g.: http://43.205.118.56:8080/
 
 cat /var/lib/jenkins/secrets/initialAdminPassword
 				
+######################
+Day 5 - 10th Feb. 2024
+######################					
+
+	
+			DevOps Perspective :::
+			
+				Jenkins Administrator :
+				
+				- Installation of Jenkins Tools 
+				- Configuration of Jenkins Server 
+				- Plugins Managements 
+				- User Management 
+				- Security Management 
+				- Tools Management 
+				- Credential Management
+				- Jenkin System Management 
+				- Jenkins Slave_Nodes Configuration and Management 
+				- Create CICD Pipeline Projects 
+				- Onboarding Applications to DevOps CICD Process 
+				- Trouble-Shooting the Issues 
+				- Backup & Recovery
+				- Jenkins Server and Plugins Upgrade	
+		
+		
+				- Plugins Managements ::
+				
+					Install/Uninstall/Upgrade te plugins.
+					
+				- User Management 
+				- Security Management 
+				
+				
+				Create Jenkins Projects :::
+				
+					- Free Style Project 
+						- Manual Configuration 
+						
+						
+				
+				Variables :::
+				
+					- Environment Variables
+					
+					- User Defined Variables
+					
+						
+					
+					
+					- Pipeline Project	- written using groovy scripts 
+					
+					Jenkins Pipeline is composed of stages 
+					Jenkins_Pipeline
+						Stages 
+							stages1
+								steps 
+							stage2 
+								steps 
+							stage2 
+								steps 
+						
+					
+						- Scripted Pipelines 
+							- 
+						
+						- Declarative Pipelines 
+					
+
+
+
+CICD Pipeline :::
+
+Jenkins Slave_Nodes Configuration and Management ::
+
+
+					Jenkins_Master 				(VM) - Jenkins Tools 		- git,jdk,jenkins
+					
+						Jenkins_Slave_Node1		(VM) - Build Java Project	- git,jdk,maven 
+							
+					Jenkins Node Configuration :
+					
+						Launch a VM 
+						Install the required build tools 
+						Integrate Jenkines Slave Node to Jenkins Master Node :
+							Create user 
+							create access token 
+						
+
+#Configure Slave Node1 for Java Maven App. :
+
+sudo -i
+
+apt update -y 
+
+Install Java ::
+
+sudo apt update -y 
+sudo apt install openjdk-11-jre -y
+java -version
+
+Install GIT :
+
+sudo apt install git -y
+
+Install Maven - Build Tool :
+https://maven.apache.org/install.html
+
+sudo apt install maven -y 
+
+
+
+Create User in Jenkins Slave Machine & Create SSH Keys 
+
+	SSH Keys --> is composed of public and private keys 
+
+
+#Add User : 
+
+useradd devopsadmin -s /bin/bash -m -d /home/devopsadmin
+
+su - devopsadmin
+
+#ssh-keygen
+
+#for Ubuntu ::
+ssh-keygen -t rsa -b 1024 -m PEM
+
+
+ls ~/.ssh 
+
+#You should see following two files:
+
+#id_rsa - private key
+#id_rsa.pub - public
+
+
+cat id_rsa.pub > authorized_keys
+
+chown -R devopsadmin /home/devopsadmin/.ssh
+chmod 600 /home/devopsadmin/.ssh/authorized_keys
+chmod 700 /home/devopsadmin/.ssh
+
+
+pipeline {
+    agent { label 'slave01' }
+
+    stages {
+        stage('SCM_Checkout') {
+            steps {
+                echo 'Clone the Source Code repository to Jenkins Project workspace'
+				git 'https://github.com/LoksaiETA/Java-mvn-app2'
+            }
+        }
+        stage('Application Build') {
+            steps {
+                echo 'Perform Maven Build'
+				sh 'mvn clean package'
+				
+            }
+        }
+        stage('Deploy the artifacts to QA') {
+            steps {
+                echo 'Hello World'
+            }
+        }
+        stage('Deploy the artifacts to UAT') {
+            steps {
+                echo 'Hello World'
+            }
+        }
+        stage('Deploy the artifacts to PROD') {
+            steps {
+                echo 'Hello World'
+            }
+        }
+    }
+}
+Configure/Integrate the Slave Node in Jenkins Master :
+
+
+Environments :::
+
+	Non-Prod												Prod 
+	
+	DEV 	- Developers  - github
+	
+	Build_Server (Slave1) - *.war
+	
+	Test 
+		QA 
+		UAT 							=======> 				Production
+		
+		
+	Maven Build Tool :::
+	
+		Build - Compile the scr_code, create artifacts, perform unit testing  
+		
+			*.war / *.jar 
+		
+		pom.xml file		
+			--> It used to define the properties of application artifacts, dependencies and plugins required to perform build.
+		
+		junit testing tool :
+		
+		Maven Goal : 
+		
+			compile 
+			clean 
+			test - COMPILE & UNIT TESTING
+			package - COMPILE, UNIT TESTING, CREATE Artifacts in Target folder of the Project Workspace.
+			
+			mvn clean package 
+						
+pipeline {
+    agent { label 'slave01' }
+
+    stages {
+        stage('SCM_Checkout') {
+            steps {
+                echo 'Clone the Source Code repository to Jenkins Project workspace'
+				git 'https://github.com/LoksaiETA/Java-mvn-app2'
+            }
+        }
+        stage('Application Build') {
+            steps {
+                echo 'Perform Maven Build'
+				sh 'mvn clean package'
+				
+            }
+        }
+        stage('Deploy the artifacts to Tomcat_Server') {
+            steps {
+				script {
+				sshPublisher(publishers: [sshPublisherDesc(configName: 'RDevOps-Tomcat-Server', transfers: [sshTransfer(cleanRemote: false, excludes: '', execCommand: '', execTimeout: 120000, flatten: false, makeEmptyDirs: false, noDefaultExcludes: false, patternSeparator: '[, ]+', remoteDirectory: '.', remoteDirectorySDF: false, removePrefix: 'target/', sourceFiles: 'target/mvn-hello-world.war')], usePromotionTimestamp: false, useWorkspaceInPromotion: false, verbose: false)])
+			}
+            }
+        }
+        stage('Deploy the artifacts to UAT') {
+            steps {
+                echo 'Hello World'
+            }
+        }
+        stage('Deploy the artifacts to PROD') {
+            steps {
+                echo 'Hello World'
+            }
+        }
+    }
+}
+
+
+sshPublisher(publishers: [sshPublisherDesc(configName: 'RDevOps-Tomcat-Server', transfers: [sshTransfer(cleanRemote: false, excludes: '', execCommand: '', execTimeout: 120000, flatten: false, makeEmptyDirs: false, noDefaultExcludes: false, patternSeparator: '[, ]+', remoteDirectory: '.', remoteDirectorySDF: false, removePrefix: 'target/', sourceFiles: 'target/mvn-hello-world.war')], usePromotionTimestamp: false, useWorkspaceInPromotion: false, verbose: false)])
+
+Deployment ::::
+
+		Launch a VM 
+		
+		Install jdk, tomcat 
+		
+		Tomcat is web- application server used to run the web application
+		Tomcat by default run in port - 8080
+		
+
+					Jenkins_Master 				(VM) - Jenkins Tools 			- git,jdk,jenkins					
+						Jenkins_Slave_Node1		(VM) - Build Java Project		- git,jdk,maven 
+					Tomcat_Server 				(VM) - Run and Test Application - jdk, tomcat 
+					
+Deployment :::
+
+	copy the artifact from source machine to a target machine :::
+	
+		Source : Jenkins_Slave_Node1												Target : Tomcat_Server
+		
+		Source path : */target/mywebapp.war											Target path : /opt/tomcat/webapps/mywebapp.war	
+
+######################Install TOMCAT Application Server on Ubuntu :::
+
+sudo -i
+
+sudo apt update -y 
+
+
+sudo apt install openjdk-11-jre -y 
+java -version
+
+#edit /etc/profile & add JAVA_HOME
+
+#/usr/lib/jvm/java-11-openjdk-amd64/
+
+vi /etc/profile
+
+java-11-openjdk-amd64
+
+
+export JAVA_HOME="/usr/lib/jvm/java-11-openjdk-amd64"
+PATH=$PATH:$HOME/bin:$JAVA_HOME/bin
+
+source /etc/profile
+
+Install Tomcat ::  https://tomcat.apache.org/download-80.cgi
+
+https://dlcdn.apache.org/tomcat/tomcat-8/v8.5.98/bin/apache-tomcat-8.5.98.tar.gz
+
+
+cd /opt
+wget https://dlcdn.apache.org/tomcat/tomcat-8/v8.5.98/bin/apache-tomcat-8.5.98.tar.gz
+
+tar -xvzf /opt/apache-tomcat-8.5.98.tar.gz
+
+mv apache-tomcat-8.5.98 tomcat
+
+#Start Tomcat Server:
+#Goto:
+
+cd /opt/tomcat/bin
+./startup.sh
+
+###########################################
+
+#Add User : 
+
+
+
+useradd devopsadmin -s /bin/bash -m -d /home/devopsadmin
+
+su - devopsadmin
+
+#ssh-keygen
+
+#for Ubuntu ::
+ssh-keygen -t rsa -b 2048 -m PEM
+
+
+ls ~/.ssh 
+
+#You should see following two files:
+
+#id_rsa - private key
+#id_rsa.pub - public
+
+
+cat id_rsa.pub > authorized_keys
+
+chown -R devopsadmin /home/devopsadmin/.ssh
+chmod 600 /home/devopsadmin/.ssh/authorized_keys
+chmod 700 /home/devopsadmin/.ssh
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+#make devopsadmin user as a owner to tomcat dir :
+
+chown -R devopsadmin /opt/tomcat
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+	Deployment ???
+	
+		Copy the artifacts from the source server to the target server :
+		
+		
+			Source Server : Jenkins_Slave 								Target Server : Tomcat 
+			
+				Source File?												Target Path ?
+				
+					target/mvn-hello-world.war									/opt/tomcat/webapps
+
+
+	Connect Tomcat Server with Jenkins :::
+	
+		Using Publish over SSH Plugin.
+		
+			Login to Jenkins Server 
+			
+			Install Publish over SSH Plugin & Restart Jenkins 
+			
+			Configure the Target Server in Jenkins Master using Publish over SSH Plugin.
+	
+	
+
+		- Deploy the Artifacts to Tomcat Server thru Jenkins 
+
+
+
+Build Triggers ::::
+
+	Build Periodic :::
+		- uses the crontab to schedule a job to run.
+		
+		8AM		12Noon
+		
+		
+	
+	Poll SCM :::
+		- Uses the crontab to schedule a job to run, if there is any changes in the source code repository.
+		
+		Test Cycle ::::
+		
+		8AM   12Noon  3PM
+	
+	GITHUB Webhook :::
+		- Used to trigger the job whenever there is any change is the source code repository.
+		- It never rely on crontab.
+	
+	
+	http://13.201.136.71:8080/github-webhook/
+	
+
+EMail Notification :::
+
+
+SMTP Server :
+smtp.gmail.com
+
+SMTP Authentication
+
+SMTP Port :: 465
+
+Login to Gmail :::
+
+Click Manage Account Settings
+
+@Left side panel - select Security 
+
+MFA --> mobile#
+App Password = 16 bytes of App Password. 
+What ? window
+Which Appln - email
+
+
+
+
+
+
+
+
+
+
+
+
