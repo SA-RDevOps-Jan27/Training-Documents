@@ -1,0 +1,247 @@
+######################
+Day 7 - 17th Feb. 2024
+######################	
+
+		Docker :		
+
+		Containerization using Docker ::::
+		
+		What is Container ?
+		
+		Why we need Container ??
+		
+		What is Virtual Machine ???
+		
+			- VMs are Hardware Level Virtualization.
+			- It is created using Hypervisor 
+			- VMs are used to run the Operating System
+			- It consume more space and time to start-up
+			
+		Containers: 
+		
+			- Containers are OS Level Virtualization.
+			- It is created using Container Engine 
+			- Containers are NOT used to run the Operating System.
+			- Containers are used to run the Application/ Tasks.
+			- If we run the container without any task, the container will immediately go to exit state.
+			- It consume less space and time to start the application
+			- Using Containers we can reduce the no. of VMs.
+			
+		
+		Infra-Structure Perspective :::
+		
+		
+					Jenkins_Master 				(VM) - Jenkins Tools 		- git,jdk,jenkins
+						Jenkins_Slave_Node1		(VM) - Build Java Project	- git,jdk,maven  
+						Jenkins_Slave_Node2		(VM) - Build Python Project 						
+						Jenkins_Slave_Node3		(VM) - Build C#.Net Project 				
+						Jenkins_Slave_Node4		(VM) - Build Angular Project
+						Jenkins_Slave_Node5		(VM) - Build Ruby Project
+						
+				Containerization :::
+		
+					Jenkins_Master 				(VM) - Jenkins Tools 		- git,jdk,jenkins
+						Jenkins_Slave_Node1		(VM) 
+							Container_Engine 
+								C1					- Build Java Project		
+								C2                  - Build Python Project 
+								C3                  - Build C#.Net Project 
+								C4                  - Build Angular Project
+								C5                  - Build Ruby Project
+		
+		Application Development/Deployment Perspective :::
+		
+				
+				Developer ::
+				
+					Code 		java Appln.
+					Build 		jdk,maven 	==> mywebapp.war_v1.0 
+					Deploy to Unit_Test Server using Tomcat_Server openJDK11,tomcat8.5 ==> run and test mywebapp.war 
+					
+					Containerization :::
+					
+						Package : mywebapp_pkg1(mywebapp.war_v1.0,openJDK11,tomcat8.5)
+						
+						Deploy the mywebapp_pkg1 to target environments.
+						
+						
+						Application_Image 
+						
+					
+					Deployed to QA_Server 	==> Oracle_jdk8.0,tomcat8.0		==>			mywebapp.war   / 	mywebapp_pkg1
+					
+						QA_Testing 			==>	Compactibility Issue!!!!
+					
+					Deployed to UAT_Server 		==> 	mywebapp_pkg1
+					
+						UAT_Testing 					
+		
+		
+					Deployed to PROD_Server		==> 	mywebapp_pkg1
+					
+						PROD_Testing 	
+
+
+				Terminologies :::
+				
+					- Containerization :
+						- It is process of packaging the Application along with its dependencies.
+						
+					- Image :	
+						- It is static file that defines the Application and its dependencies to create container.
+						- Composed of layers of Instructions
+						- It is Non-Executable.
+						
+					- Container :
+						- Container is a executable unit of Image.
+						
+					- Container_Engine :
+						- It is used to Create Container Images and Containers and run / Manage the Contianers.
+						- Docker Container Engine.
+						
+					- Container Registry :
+						- It is used to Store/Manage/Version Control the Container Images.
+						- dockerhub 
+						- www.hub.docker.com
+						
+					- Container_Repository :
+						- Sub-Set of Container Registry
+						
+						cts : registry
+						 account1 - repository1 - image1,2,3,4
+						 account2 - repository2 - image1,2,3,4
+						 
+				Install Docker Engine :
+				
+				Working with Container Images and Containers..... 
+						 
+						 
+						
+				Environment
+
+				Non-Prod																Prod 
+				
+				DEV(VM)
+					build Application		*.war
+					Create Application Image 
+					Publish the Image to Container registry 
+				
+				QA(VM) 
+					Download the Image1 from Container Registry
+					Create/Run Container1
+					
+					Download the Image1 from Container Registry
+					Create/Run Container2				
+				
+					UAT(VM) 													--> 			Production 
+									
+			
+				Create DockerHub Account :
+						https://hub.docker.com/
+				Install Docker Engine :
+						https://docs.docker.com/engine/install/
+						
+						
+					Install Docker in the Jenkins_SlaveNode - Ubuntu Machine 
+					
+						apt install docker.io -y
+					
+						docker --version
+						
+						
+					Working with Docker CLI Commands :::
+					
+					docker --version
+					
+					docker images 		- 	used to get the list container images present in the local machine.
+					
+					docker ps 			- 	used to get the list of only the running containers 
+					
+					docker ps -a		- 	used to get the list of all the containers i.e., in running/exit state
+					
+					docker pull			- 	used to download the container image from container register(dockerhub)
+					
+					docker run 			- 	used to create/run the container in local machine.			
+
+					docker run :::
+						
+						3 Modes of Container Execution ::
+						
+						docker run --> 
+						
+							- Attached/Foreground Mode 		#Default Mode 
+									-- Hold the Terminal
+							
+							- Detached/Background Mode 
+									-- Will not hold the terminal
+							
+							- Interactive Mode 
+									-- In Interactive Mode, we can access the Container 
+									
+						
+						docker start <container_id>			# Start the container which is stopped/exit state 
+						
+						docker exec -it <contianer_id> bash # Used to login to the running container.
+						
+						docker stop <container_id> 			# Stop the running container.
+						
+						docker kill <container_id> 			# Force stop the running container.
+						
+   13  docker --version
+   14  clear
+   15  apt update -y
+   16  clear
+   17  apt install docker.io -y
+   18  docker --version
+   19  clear
+   20  docker images
+   21  docker ps
+   22  docker ps -a
+   23  docker images
+   24  clear
+   25  docker images
+   26  docker pull centos
+   27  docker images
+   28  docker history 5d0da3dc9764
+   29  docker ps
+   30  docker ps -a
+   31  docker run centos
+   32  docker ps
+   33  docker ps -a
+   34  docker run centos sleep 30
+   35  docker run centos sleep 20
+   36  sadfasdfasdfasdfasdfasd
+   37  docker run centos sleep 20
+   38  clear
+   39  docker run -d centos sleep 20
+   40  asdfasd
+   41  docker ps
+   42  docker run -it centos
+   43  clear
+   44  docker run centos sleep 60
+   45  history
+
+   13  docker ps
+   14  clear
+   15  docker ps
+   16  docker ps -a
+   17  docker images
+   18  docker run -it ubuntu
+   19  docker ps -a
+   20  docker start 9d6c4ee7b687
+   21  docker ps -a
+   22  docker ps
+   23  docker exec -it 9d6c4ee7b687 bash
+   24  docker ps
+   25  docker exec -it ee34739b2d8b bash
+   26  clear
+   27  docker ps
+   28  docker stop 9d6c4ee7b687
+   29  history
+
+Next ::::				
+					
+					Build Docker Images 
+					
+					Docker Volumes 
+					
