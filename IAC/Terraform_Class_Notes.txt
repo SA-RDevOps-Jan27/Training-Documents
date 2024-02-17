@@ -1,0 +1,206 @@
+		
+Terraform :::
+
+			IAC Tool : Used for Provisioning/Creating the Servers.
+			
+			Ansible - *.yaml 
+			
+			Terraform - HCL - HashiCorp Declarative Language(based on json file format)
+			
+			Terraform Architecture 
+			
+			Why ??
+			
+			Components of Terraform 
+			
+			Terraform Working Model :::
+			
+			AWS - Cloudformation 	IAC used to automate the resource provisioning
+			
+			Azure - Azure Resource Manager  - ARM
+			
+			
+			Terraform Working Model ::
+			
+				- Identify the Scope 
+				
+				- Write the Config file - *.tf
+				
+				- Initialize the Terraform provider 
+				
+				- plan 
+				
+				- apply 
+				
+		Create AWS EC2 Instances using Terraform
+		
+		Pre-requisites :::
+		
+			Visual Studio Code in Local Machine --> https://code.visualstudio.com/download
+			
+			Install Terraform in Local Machine - demo
+					https://developer.hashicorp.com/terraform/tutorials/aws-get-started/install-cli
+					
+			Create AWS Resource.
+
+			
+			
+Next :: 
+
+		Terraform Demo 
+		
+		Docker 
+			
+######################
+Day 7 - 17th Feb. 2024
+######################	
+
+
+		Terraform Demo :
+		
+		Docker
+		
+		Kubernetes
+		
+			
+			Terraform Working Model ::
+			
+				- Identify the Scope 
+				
+				- Write the Config file - *.tf
+				
+				- Initialize the Terraform provider 
+				
+				- plan 
+				
+				- apply 
+
+			Use Terrafrom Registry!
+				Eclipse based IDEs --> 
+				
+				Eclipse IDE / Intellij
+				
+				Pycharm 
+				
+				Visual Studio Code (VSC)
+				
+				Visual Studio 
+				
+				Visual Studio Lite!			
+			
+			1. Install Terraform in windows machine.
+				https://developer.hashicorp.com/terraform/install
+				
+				download Windows -> AMD64 
+				Extract
+				
+				Create Environment Variable for Terraform
+				
+				Open Visual Studio Code
+				
+				Goto Extensions - Search for Terraform - Choose Hashicorp Terraform Extension & Install.
+			
+				Create Project in VSC 
+				
+				create aws.tf in that project folder 
+				
+				goto terminal menu - select new terminal
+				
+				terraform --version
+
+			Working with Terraform :
+			
+				- Identify the Scope 
+						Identify the Provider in the config file.
+						Define the Resource.
+				
+				- Write the Config file - *.tf
+				
+				- Initialize the Terraform provider 		==> Identify the aws provider in terraform project 
+				
+				- plan 										==> Used to preview the Terraform config file.
+				
+				- apply 									==> Used to apply the changes in the target platform	
+
+
+				
+			Using Terraform ::
+			
+				Create/Add Resource 		+
+				
+				Update/Change Resource		~
+				
+				Delete/Destroy Resource		-
+				
+				
+			terraform State File ::: Used to identify/maintain the current state of the resource.
+									 State file gets updated for every terraform apply command
+									 
+			
+	Use Case 1:
+	
+		CICD Pipeline :::
+		
+		Pipeline1: 
+			Stages :::
+			
+				SCM Checkout
+				Build 
+				Deploy_to_QA (Testing)
+
+	Use Case 2:				
+		Pipeline1 :
+		
+			SCM_Checkout -> Create_Test_Server(Terraform_Script) -> Config_Server(Ansible_Playbook) 
+				
+		Pipeline2: 
+			Stages :::
+			
+				SCM Checkout
+				Build 
+				Deploy_to_Test_Server (Testing)		
+									 
+	Use Case 3:				
+		Pipeline1 :
+		
+			SCM_Checkout -> Application_Build -> Create_Test_Server -> Config_Server -> Deploy_to_QA -> Test
+			
+		Pipeline1: As a best practise :
+		
+			SCM_Checkout -> Application_Build -> Create_Test_Server -> Config_Server -> Deploy_to_QA -> Test -> Destroy_QA_Server
+			
+
+Summary :
+
+		Terraform Workflow ::
+		Installation 
+		Terraform Provider
+		state file 
+		
+		init 
+		plan 
+		apply 
+		destroy
+
+
+
+
+provider "aws" {
+  region     = "ap-south-1"
+  access_key = "asdfasdf"
+  secret_key = "asdfasdfasdfasdf"
+}
+
+# Create AWS Instance
+
+resource "aws_instance" "rdevops-ins1" {
+  
+  ami           = "ami-06b72basdfsd3b2a773be2b"
+  instance_type = "t3.micro"
+  key_name      = "sa-noasdfsdv16-kp1"
+
+  tags = {
+    Name = "rdevops_dummy_server"
+  }
+}
+
