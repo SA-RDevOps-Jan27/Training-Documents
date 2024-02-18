@@ -1,0 +1,95 @@
+######################
+Day 8 - 18th Feb. 2024
+######################	
+	
+		
+	Container Orchestration using Kubernetes :::
+	
+			Kubernetes :
+					Is the Open Source Container Orchestration Tool used to manage the Containers.
+					Used to ensure High availability of Containers.
+					Create Replicas of Containers
+					Auto-Scaling 
+					Load Balancing
+
+		
+			Managed Services :::
+				AWS 		- ECS,ECR,EKS
+				
+				AZURE 	- ACS,ACR,AKS
+				
+				GCP 		- GCE,GCR,GKE
+				
+				
+			- Kubernetes Architecture  #Important!
+			
+				Kubernetes_Master 
+					Kubernetes_Cluster
+						Kubernetes_WorkNode1
+						Kubernetes_WorkNode2
+						Kubernetes_WorkNode3
+								
+			- Kubernetes Terminologies / Concepts 
+			
+				- kubelet - Agent runs in all the nodes for pod deployments	
+				
+				- kubeadm - Utility to install and configure the Kubernetes.
+				
+				- kubectl - Is  CLI used to interact with Kubernetes Master
+				
+				- Images  - Is a static file defines the properties of the Container - Non-Executable - maintained in the Container Registry
+				
+				- Contiainers 	- Executable units of the Images 
+				
+				- CRI - Container Runtime Interface - used by kubernetes to access the Container Images 
+						
+			- Installation Kubernetes Cluster :
+			
+				- Kubernetes - MiniKube
+				
+				- Kubernetes - kubeadm utility
+				
+				1. Launch 3 VMs 
+				
+				Commands to be executed in all the Nodes ::
+					2. Enable all the Required Ports
+					
+					3. Assign Unique Host Name 
+					
+					4. Install Docker Engine 
+					
+					5. Install CRI - ContainerD 
+					
+					6. Install Kubeadm, Kubelet, Kubectl
+					
+					7. Swap off 
+			
+				Commands to be executed only in Master Node ::
+					
+					1. kubeadm init 
+					
+				Command to be executed in all the Worker Nodes ::
+					
+					1. kubeadm join 				
+
+
+				
+			- Concepts 
+			
+				- Pods
+				
+				- Pod Networking 
+				
+				- Namespaces 
+				
+				- Controller Objects 
+					- Deployment 
+					- Replicaset 
+					
+				- Services
+					- NodePort 
+					- ClusterIP
+					- LoadBalancer
+
+				- Volumes 
+					- Persistant Volumes 
