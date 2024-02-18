@@ -245,3 +245,204 @@ Next ::::
 					
 					Docker Volumes 
 					
+######################
+Day 8 - 18th Feb. 2024
+######################	
+
+		Docker 
+		
+		Kubernetes Intro. Architecture!
+		
+		
+		Port Mapping 
+		
+		Docker Build / Commit 
+		
+		
+		Docker Volumes 
+		
+
+		
+		Container Orchestration Tool :
+
+			Docker Compose 
+		
+			Docker Swarm 
+			
+			Kubernetes
+		
+		
+		docker rm 		# used to remove the container 
+		
+		docker rmi 		# to remove the container image
+		
+		
+		Contianer Port mapping/binding!
+		
+		
+		Tomcat web application server
+		
+		external_ip:8080
+		
+		
+		docker run -it -p 8085:8080 tomcat:8.0
+			
+		docker run -it tomcat:8.0 bash 
+		
+		
+		-p <host_port>:<container_port>
+		
+		
+		
+		Docker Volume :::
+		
+			- Volumes are used to maintain the persistant container data.
+			
+			
+			Stateful Application		# It leave the trace of Execution. logs / reports / artifacts 
+											Volume can be used for input/output
+			
+			Stateless Application		# It never leave any trace of Execution.
+			
+			3-tier application ::					== 	Monolith Application
+				- Front-End(User Interface) Layer 
+				- Application(Business Logic) Layer 
+				- Back-End(Database) Layer
+				
+			Micro-Service Based Application ::
+			
+			3-tier application ::		webapp1			
+				- Front-End(User Interface) Layer 			- C1 -
+		    	- Application(Business Logic) Layer			- C2 
+				- Back-End(Database) Layer					- C3
+		    	
+			docker run -it --mount source=rdevops-vol1,destination=/rdevops-vol1 centos bash
+
+
+		Container Orchestration :::
+		
+			Docker Compose :::			
+			
+					It is used to run multiple containers as a service.
+					
+					Write a Docker Compose file (Manifest File) - *.yaml
+					
+					docker run ???
+					
+					Install Docker Compose utility.
+					
+			Docker Swarm :::	
+					
+					Is one of the Container Orchestration Tools used to manage only the Docker Containers.
+					Used to ensure High availability of Containers.
+					Create Replicas of Containers 
+		
+			3-tier application ::		webapp1			
+				- Front-End(User Interface) Layer 			- C1 - (C1.1,C1.2,C1.3)
+		    	- Application(Business Logic) Layer			- C2 - (C2.1,C2.2,C2.3) 
+				- Back-End(Database) Layer					- C3 - (C3.1,C3.2,C3.3)	
+
+
+			Kubernetes :
+					Is the Open Source Container Orchestration Tool used to manage the Containers.
+					Used to ensure High availability of Containers.
+					Create Replicas of Containers
+					Auto-Scaling 
+					Load Balancing
+					
+					
+			Docker Build / Commit :::
+			
+				- Used to Create the Container Images :
+				
+				Both Docker Commit & Build Commands are used to create Container Images.
+				
+				Docker Commit :
+				
+					- It is used to create the Container Image based on the existing Container.
+					- It uses Container ID as a input to create the container image.
+					
+					docker commit <contiainer_id> <New_ImageName>
+					
+					Eg.: 
+					
+					docker commit c01bfe38e24e loksaieta/rdevopsbs
+					
+					docker commit c01bfe38e24e loksaieta/rdevopsbs:v1.0
+
+
+				
+				Docker Build :  #
+					- It is used to create the Container Image from the scratch based on the Container Image.
+					- It uses Dockerfile as a input to create the container image.
+					
+					Dockerfile is a file that defines the various layers of the container Image Definition.
+					
+					Dockerfile Composed of Various Dockerfile Instructions.
+					
+					Dockerfile Instructions ::::
+					
+					Syntax: 
+					
+					docker build -t <New_ImageName>:v1.0 .   - (. - is used to refer the dockerfile)
+					
+					docker build -t loksaieta/rdgitserv:v1.0 .
+					
+					Understand the Dockerfile Instructions :::
+					
+						FROM ubuntu
+						RUN apt-get update
+						RUN apt-get install git -y
+						
+					- FROM				# Used to indentify the base image. 						
+					
+					- RUN 				# Used to execute the Package Manager based on the Base-Image 
+					
+					- ARG 				# ARG used pass the arguments to the following Instructions 
+					
+					- WORKDIR			# Used to identify the current Working Directory 
+					
+					- COPY 				# Used to Copy the files from Host Volume  to the Container Volume. 
+					
+					- CP				# Used to Copy the files within the Container Volumes.
+					
+					- ENV				# Used to define the Environment Variables
+					
+					- EXPOSE 			# Used to Expose the Container Port 
+					
+					- CMD 				# Used to Execute the start-up command when you run the container
+										# The Commands used in the CMD can be changed at run-time.	
+					
+					- ENTRY-POINT		# Used to Execute the start-up command when you run the container
+										# The Commands used in the ENTRY-POINT CANNOT be changed at run-time.
+
+
+				Docker Push :
+
+					docker push 	- Used to Publish the Images to Dockerhub registry.
+				
+					Login to DockerHub using Docker CLI.
+						
+						- Dockerhub Login ID 	 -->	docker login -u loksaieta
+							
+						- Access Token	 		 --> 	dckr_pat_G50vNwZUEKuo5qmqjEIloix5PHo
+						
+					
+					docker push - command to push the image.
+					
+						docker push loksaieta/rdevopsbs						
+						
+						docker push loksaieta/rdgitserv:v1.0 
+						
+Summary ::
+
+		Importance of Containerization
+		VM (vs) Containers 
+		Terminologies 
+		port mapping 
+		volumes
+		compose 
+		docker commit / build 
+		publish images to container registry 
+		Container Orchestration
+		
