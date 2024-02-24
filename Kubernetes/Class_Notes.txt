@@ -93,3 +93,85 @@ Day 8 - 18th Feb. 2024
 
 				- Volumes 
 					- Persistant Volumes 
+######################
+Day 9 - 24th Feb. 2024
+######################			
+	
+	Kubernetes Concepts :
+
+		- Pods
+		
+		- Pod Networking 
+		
+		- Namespaces 
+		
+		- Controller Objects 
+			- Deployment 	- ZERO Downtime.
+			
+				- Used to create replicas of pods 	- v1.0 - initial version 
+				- Used to Upgrade application 		- v1.2 - Latest Version 
+				- Used to roll back the changes 	- Roll back the chages to v1.0
+				- Used to Scale-Up the Pods
+				- Used to Scale-Down the Pods 
+				
+				Deployment Strategy - Rolling-Update 
+				
+			- Replicaset		- used to create the replicas of pods  
+			
+		- Services
+			- NodePort 
+			- ClusterIP	
+				- Default Kubernetes Service
+				- Scope of this Service is within the cluster
+				
+				3 - Tier Application!
+					
+					Front-End			FE-Pods
+					Application-Layer   AL-Pods
+					Back-End(DBase) 	DB-Pods
+				
+			- LoadBalancer
+
+		- Volumes 
+			- Persistant Volumes
+			
+			- Hostpath Volume !
+			
+				To work with Stateful Applications 
+			
+			
+		- Namespaces :::
+		
+			- Logical Partition on the Cluster
+
+		Environments ::::
+		
+		
+		DEV 			VM 
+		
+		QA 				VM 
+		
+		UAT 			VM 
+			
+		PROD			VM1,VM2,VM3 
+		
+		
+		Kubernetes_Cluster		DEV / QA
+			WN1,2,3,4,5,6
+			
+		Non-Prod Cluster					Prod_Cluster 
+		
+			NP_Kubernetes_Cluster				Prod_Kubernetes_Cluster1   --> V1.0
+				WN1,2,3,4,5                 		WN1,2,3,4,5,6
+												
+												Namespace V2.0
+													WN1,2,3,4,5,6
+		Adhoc-Namespace1 										
+												
+		DEV Namespace 								Blue Green Deployments!
+		QA Namespace									prod_Server1 - DOWN Server -> V1.0
+		UAT Namespace									prod_Server2 - LIVE Server -> V2.0
+		
+		App1Team Namespace
+				
+		
