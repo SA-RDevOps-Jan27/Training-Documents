@@ -1,0 +1,80 @@
+######################
+Day 9 - 24th Feb. 2024
+######################			
+			
+	Monitoring Tools - Prometheus/Grafana 
+
+
+	Continuous Monitoring :
+	
+		- Infra-Structure Monitoring
+				- CPU/Memory/Traffic 
+				
+				- Parameters - for CPU/Memory/Traffic  - 80%
+			
+			Tools : Prometheus/Grafana/Nagios/Splunk/Dynatace
+			
+			Prometheus is a Monitoring Tool: Open Source 
+			
+			Grafana - is a Virtualization Tool:
+			
+			AWS Cloud Watch 
+			Azure Monitor 
+			
+			
+			Production Monitoring Team:
+			
+				Define some monitoring tasks & Schedule
+				Automate the Monitor and Response?
+					Jenkins Jobs 
+					
+					Build Server:
+						- build application & Create artifacts 
+						
+						- clone scr_code repo1,,,...........,100 
+						- build 
+						- create artifacts 
+			
+			Production Support Team 
+		
+		- Application Monitoring
+			
+			Application Monitor the performance of Application calls 
+			
+			Tools : DataDog / AppDynamics
+			
+			
+		Fundamentals of Monitoring Tools ::
+		
+			- Architecture of Monitor Tools :::
+			
+				Prometheus Service 
+
+				Prometheus Agent 
+				
+				Prometheus Retrieval Component
+				
+				Time Series Database 
+				
+				PromQL 
+				
+				
+		Install Prometheus & Grafana :::
+		
+		
+			1 - Monitoring Server VM 
+			
+			2 - Target Server VM
+		
+		
+Next ::
+
+		Installation of Grafana 
+		
+		Set up Prometheus & Grafana 
+		
+		Create Monitoring Dashboards in Grafana using Prometheus
+						
+		End-to-End CICD Pipeline Demo
+		
+		
