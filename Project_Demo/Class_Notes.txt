@@ -1,0 +1,241 @@
+########################
+Day 10 - 25th Feb. 2024
+########################		
+						
+
+	Installation of Grafana 
+	
+	Set up Prometheus & Grafana 
+	
+	Create Monitoring Dashboards in Grafana using Prometheus
+					
+	End-to-End CICD Pipeline Demo
+	
+		
+	Demo - CICD Pipeline :::
+	
+	DevOps Perspective :::
+	
+		Developer Create the Application 
+		Application Source Code is maintained in Src_Code Repository(github/gitlab/az_repo/bit_bucket/aws_codecommit)
+		
+		DevOps Responsibilities :::
+		
+			Automated the Application Builds and deployments ::
+
+			- Application : 
+			
+				Java web application 
+					- How the application is build ?
+					- Build tools ?
+					- Build Parameters and dependencies 
+					- Source Code Repository :
+						- pom.xml -- > Build Parameters and dependencies 
+						- maven clean package 
+					
+							
+				
+			- DevOps Tools used to automate the  Application Builds and deployments :
+			
+				Jenkins 
+				Maven - build 
+				AWS 
+				Docker 
+				Ansible / Terraform for Provisioning
+				Kubernetes
+				
+				
+			DevOps - Application Build and Deployment Servers :
+				
+				Jenkins_Master 			 -> Used to create Jenkins CICD Pipelines and schedule to Jenkins Nodes for Build
+					Build_Server 		 -> Used to Build the Application Artifacts & Docker Image, push to Dockerhub
+				Kubernetes_Master
+					Kubernetes_WorkNode1
+					Kubernetes_WorkNode2
+					
+				
+			DevOps Tools :				
+			
+				Jenkins_Master 			-> git,jdk,jenkins 	
+					Build_Server 		-> git,jdk,maven,docker - 
+				Kubernetes_Master		-> 
+					Kubernetes_WorkNode1
+					Kubernetes_WorkNode2		
+					
+					Perform Docker Build -> Used to Create Application Image
+											Dockerfile
+					
+					
+				Target Server (QA/UAT/PROD)
+				
+				
+			Workflow 1:
+			Server-Provisioning & Configuration
+			
+			Workflow 2:
+			CICD Pipeline :::
+
+				Stages in Pipeline :
+				
+					- SCM_Checkout 						# Clone the github scr_code repo to slave node 
+					- Application_Build 				# Compile, Create Artifacts and Unit Testing - *.war/*.jar
+					- Build_Docker Application Image 	# docker build using Dockerfile & Create docker Container Image 
+					- Login to Docker_Hub				# Login to Dockerhub using Access Token 
+					- Push Docker Image to Dockerhub	# Publish Application Image to Container Registry 
+					- Deploy to Kubernetes				# Deploy the Pods using Application Images
+					
+			Pre-requisities ::::
+			
+				- Integration of the Servers in the DevOps Workflow.
+				
+					Jenkins_Master 	-- Jenkins Slave Node (User,access key, and authorized_keys)
+					Jenkins_Master 	-- Kubernetes_Master  (User,access key, and authorized_keys, give kubectl access to user)
+					Publish over ssh plugins we can integrate Jenkins_Master 	-- Kubernetes_Master.
+					
+				- Slave Node 		-- Setup access to the user to execute docker cli commands		
+
+					sudo usermod -aG docker devopsadmin 				
+					
+				- Jenkins Master should be updated with the required credentials of the external servers(DockerHub) 
+				
+		
+				
+				- Kubernetes Master -- Setup access to the user to execute kubectl commands
+				
+			
+			Create CI-CD Pipeline ::::
+		
+			
+			
+		Email Notifications :
+		
+			Success
+			
+			failure 
+			
+			unstable 
+
+
+
+pipeline {
+
+    agent { label 'slave01' }
+	
+    tools {
+        maven "maven-3.6.3"
+    }
+
+	environment {	
+		DOCKERHUB_CREDENTIALS=credentials('dockerloginid')
+	}
+	
+    stages {
+        stage('SCM_Checkout') {
+            steps {
+                echo 'Perform SCM Checkout'
+				git 'https://github.com/LoksaiETA/BankingApp.git'
+            }
+        }
+        stage('Application_Build') {
+            steps {
+                echo 'Perform Maven Build'
+				sh 'mvn -Dmaven.test.failure.ignore=true clean package'
+            }
+             post {
+                success {
+                  sh "echo 'Send mail on Build successful'"
+					mail bcc: 'loksaieta223@gmail.com', body: 'The Job Status', cc: 'loksaieta223@gmail.com', from: '', replyTo: '', subject: 'Maven Build Failed', to: 'loksaieta223@gmail.com,loksaieta223@gmail.com,loksaieta223@gmail.com'
+                }
+                failure {
+                  sh "echo 'Send mail on Build failure'"
+					mail bcc: 'loksaieta223@gmail.com', body: 'The Job Status', cc: 'loksaieta223@gmail.com', from: '', replyTo: '', subject: 'Maven Build Failed', to: 'loksaieta223@gmail.com,loksaieta223@gmail.com,loksaieta223@gmail.com'
+                }
+              }
+        }
+        stage('Build Docker Image') {
+            steps {
+				sh 'docker version'
+				sh "docker build -t loksaieta/loksai-eta-app:${BUILD_NUMBER} ."
+				sh 'docker image list'
+				sh "docker tag loksaieta/loksai-eta-app:${BUILD_NUMBER} loksaieta/loksai-eta-app:latest"
+            }
+        }
+        stage('Approve - Publish_to_Docker_Registry'){
+            steps{
+                
+                //----------------send an approval prompt-------------
+                script {
+                   env.APPROVED_DEPLOY = input message: 'User input required Choose "Yes" | "Abort"'
+                       }
+                //-----------------end approval prompt------------
+            }
+        }
+		stage('Login2DockerHub') {
+
+			steps {
+				sh 'echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin'
+			}
+		}
+		stage('Publish_to_Docker_Registry') {
+			steps {
+				sh "docker push loksaieta/loksai-eta-app:latest"
+			}
+		}
+        stage('Approve - Depoyment'){
+            steps{
+                
+                //----------------send an approval prompt-------------
+                script {
+                   env.APPROVED_DEPLOY = input message: 'User input required Choose "Yes" | "Abort"'
+                       }
+                //-----------------end approval prompt------------
+            }
+        }	
+		stage('Deploy to Kubernetes') {
+            steps {
+				script {
+				sshPublisher(publishers: [sshPublisherDesc(configName: 'RDevOps-CICD-Kubernetes', transfers: [sshTransfer(cleanRemote: false, excludes: '', execCommand: 'kubectl apply -f kubernetesdeploy.yaml', execTimeout: 120000, flatten: false, makeEmptyDirs: false, noDefaultExcludes: false, patternSeparator: '[, ]+', remoteDirectory: '.', remoteDirectorySDF: false, removePrefix: '', sourceFiles: '*.yaml')], usePromotionTimestamp: false, useWorkspaceInPromotion: false, verbose: false)])
+			}	
+            }
+		}
+    }
+}
+
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: bankapp-eta-deploy
+  labels:
+    app: bankapp-eta-app
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: bankapp-eta-app
+  template:
+    metadata:
+      labels:
+        app: bankapp-eta-app
+    spec:
+      containers:
+      - name: bankapp-eta-container
+        image: loksaieta/bankapp-eta-app
+        ports:
+        - containerPort: 8082
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: bankapp-eta-np-service
+  labels:
+    app: bankapp-eta-app
+spec:
+  selector:
+    app: bankapp-eta-app
+
+  type: NodePort
+  ports:
+  - nodePort: 31002    
+    port: 8082
+    targetPort: 8082
